@@ -64,7 +64,7 @@ public class LinkedList {
 		System.out.println(" last third of list :"+linkList.getLast(3).data);
 		System.out.println(" last third of list :"+linkList.getLast(1).data);
 		
-		System.out.println(" last third of list :"+linkList.getLastUsingTwoPointer(15).data);
+		System.out.println(" last third of list using two pointer approach:"+linkList.getLastUsingTwoPointer(15).data);
 	}
 	
 	public void printList(){

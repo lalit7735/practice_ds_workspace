@@ -46,11 +46,33 @@ public class LinkedList {
 		
 		Node prevNode = linkList.searchForPrevNode(9);
 		System.out.println(prevNode!=null?"exists":"not exists");
+		
+		//linkList.deleteLinkedList();
+		//linkList.printList();
+		System.out.println("size of list using iteration:"+linkList.getSize());
+		System.out.println("size of list using recurssion:"+linkList.getSize(linkList.head));
+		
+		System.out.println("is 5 exists :"+linkList.search(5));
+		System.out.println("is 35 exists :"+linkList.search(5));
+		
+		System.out.println("is 5 exists :"+linkList.search(linkList.head,5));
+		System.out.println("is 35 exists :"+linkList.search(linkList.head,35));
+		
+		System.out.println(" element at 0th:"+linkList.get(0).data);
+		System.out.println(" element at 3th:"+linkList.get(3).data);
+		
+		System.out.println(" last third of list :"+linkList.getLast(3).data);
+		System.out.println(" last third of list :"+linkList.getLast(1).data);
+		
+		System.out.println(" last third of list :"+linkList.getLastUsingTwoPointer(15).data);
 	}
 	
 	public void printList(){
 		System.out.println(" -- iterating list -- ");
 		Node next=head;
+		if(head == null){
+			System.out.println("no data in list");
+		}
 		while(next!=null){
 			System.out.println(next.data);
 			next=next.next;
@@ -83,6 +105,22 @@ public class LinkedList {
 		lastNode.next=node;
 	}
 	
+	public int getSize(){
+		int  count=0;
+		Node next=head;
+		while(next!=null){
+			count++;
+			next=next.next;
+		}
+		return count;
+	}
+	
+	public int getSize(Node head){
+		if(head == null){
+			return 0;
+		}
+		return 1 + getSize(head.next);
+	}	
 	/*
 	 * This method will insert a node at start of linked  list
 	 */
@@ -115,6 +153,10 @@ public class LinkedList {
 		}
 		return null;
 	}
+	
+	public void deleteLinkedList(){
+		head=null;
+	}
 	public void delete(int  value){
 		Node prevNode = searchForPrevNode(value);
 		if(prevNode!=null){
@@ -136,4 +178,60 @@ public class LinkedList {
 		}
 		delete(nodeToDelete.data);
 	}
+	
+	public boolean search(int number){
+		Node current=head;
+		while(current != null){
+			if(current.data == number){
+				return true;
+			}
+			current=current.next;
+		}
+		return false;
+	}
+	
+	public boolean search(Node head,int number){
+		if(head == null){
+			return false;
+		}
+		else if(head.data == number){
+			return true;
+		}
+		return search(head.next,number); 
+	}
+	
+	public Node get(int index){
+		int count = 0;
+		Node current = head;
+		while(current != null){
+			if(count == index){
+				return current;
+			}
+			current=current.next;
+			count++;
+		}
+		return null;
+	}
+	
+	public Node getLast(int index){
+		int size = getSize();
+		return get(size-index);
+	}
+	
+	public Node getLastUsingTwoPointer(int index){
+		Node refNode=head;
+		Node mainNode=head;
+		int count=0;
+		while(refNode!=null){
+			if(count != index){
+				refNode=refNode.next;
+				count++;
+			}else{
+				refNode=refNode.next;
+				mainNode=mainNode.next;
+			}
+		}
+		return mainNode;
+	}
+	
 }

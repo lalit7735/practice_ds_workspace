@@ -3,11 +3,23 @@ package ds.stack;
 import java.util.Stack;
 /*
  * Algorithm used
+ * scan expression from left to right and do the following
+ * 1.) if  char is operand then add to expression
+ * 2.) if char is '(' push to stack
+ * 3.) if char is operator then 
+ *   3.1) if operator precedence if more than precedence of operator in stack
+ *   or stack contains '(' or stack is empty then push to stack
+ *   3.2) else if operator precedence is lower than operator in stack then pop all
+ *   element with greater precedence or paranthesis is encountered and add to exp
+ *   finally push scanned char to stack
+ * 4.) if char is ')' then pop all operator unit encounters '('
+ * 5.) repeat above for whole expression
+ * 6.) pop all remaining from stack and add to prefix expression 
  */
-public class InfixToPrefix {
+public class InfixToPostfix {
 
 	public static void main(String[] args) {
-		String prefixExp = InfixToPrefix.infixToPrefix("a+b*(c^d-e)^(f+g*h)-i");
+		String prefixExp = InfixToPostfix.infixToPrefix("a+b*(c^d-e)^(f+g*h)-i");
 		System.out.println(prefixExp);
 	}
 
